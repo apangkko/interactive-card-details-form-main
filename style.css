@@ -1,0 +1,244 @@
+:root {
+    --clr-white: hsl(0, 0%, 100%);
+    --clr-red: hsl(0, 100%, 66%);
+    --clr-blue: hsl(249, 99%, 64%);
+    --clr-violet: hsl(278, 94%, 30%);
+    --clr-lightGray: hsl(270, 3%, 87%);
+    --clr-darkGray: hsl(279, 6%, 55%);
+    --clr-darkViolet: hsl(278, 68%, 11%);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body, p {
+    margin: 0;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: .5rem;
+    margin: .25rem 0;
+    border: 1px solid var(--clr-lightGray);
+    outline: none;
+}
+
+main {
+    min-height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 33% 1fr;
+    background-image: url('./images/bg-main-desktop.png');
+    background-size: 33% auto;
+    background-repeat: no-repeat;
+}
+
+.card-imgs {
+    display: grid;
+    align-content: center;
+    padding-left: 30%;
+}
+
+.card {
+    width: 447px;
+    height: 245px;
+    color: var(--clr-white);
+}
+
+.card.front {
+    background-image: url('./images/bg-card-front.png');
+    margin-bottom: 37px;
+    padding: 2rem;
+    display: grid;
+}
+
+.card-no {
+    font-size: 28px;
+    align-self: end;
+}
+
+.card-info {
+    font-size: 1rem;
+    align-self: end;
+    text-transform: uppercase;
+}
+
+.card-exp {
+    float: right;
+}
+
+.card.back {
+    margin-left: 20%;
+    background-image: url('./images/bg-card-back.png');
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 3.5rem;
+    font-size: 16px;
+}
+
+.card-forms {
+    display: grid;
+    place-items: center;
+}
+
+#card-form, #thankyou {
+    display: grid;
+    width: 380px;
+}
+
+#card-form label { 
+    color: var(--clr-darkViolet);
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+#thankyou {
+    display: none;
+    place-items: center;
+}
+
+.thank-text {
+    color: var(--clr-darkViolet);
+    font-size: 28px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin: 2rem 0 .8rem;
+}
+
+.addCard-text {
+    color: var(--clr-darkGray);
+    font-size: 18px;
+    margin-bottom: 2rem;
+}
+
+input::placeholder {
+    color: var(--clr-lightGray);
+}
+
+.input-box {
+    margin: .5rem 0;
+}
+
+.exp-cvc {
+    display: flex;
+    column-gap: 1rem;
+}
+
+.exp-cvc > * {
+    width: 50%;
+}
+
+.exp-date > div {
+    display: flex;
+    column-gap: .5rem;
+}
+
+small {
+    color: var(--clr-red);
+    display: none;
+}
+
+.error > small {
+    display: block;
+}
+
+.error input {
+    border-color: var(--clr-red);
+}
+
+.success > input {
+    border-color: var(--clr-violet);
+}
+
+.btn {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    border-radius: .5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--clr-darkViolet);
+    border: 0;
+    color: var(--clr-white);
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--clr-violet);
+}
+
+@media only screen and (max-width: 1300px) {
+    main {
+        grid-template-columns: 1fr;
+        background: none;
+    }
+
+    .card-imgs {
+        background-image: url('./images/bg-main-mobile.png');
+        background-size: cover;
+        padding: 0 1rem;
+        height: 240px;
+        display: grid;
+        position: relative;
+    }
+
+    .card {
+        width: 285px;
+        height: 156px;
+        background-size: cover;
+    }
+
+    .logo {
+        width: 55px;
+    }
+
+    .card.front {
+        position: absolute;
+        top: 7.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: unset;
+        margin-left: -30px;
+        padding: 1rem;
+        z-index: 1;
+    }
+    
+    .card-no {
+        font-size: 18px;
+    }
+    
+    .card-info {
+        font-size: 12px;
+    }
+
+    .card.back {
+        position: absolute;
+        top: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        margin: unset;
+        margin-left: 30px;
+        padding: 2.5rem;
+    }
+
+    .card-forms {
+        padding: 5rem 1rem 3rem;
+    }
+}
