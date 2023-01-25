@@ -69,13 +69,8 @@ const isCardNoValid = (cardNo) => {
     return re.test(cardNo);
 };
 
-
-cardNoEl.addEventListener("input", () => cardNoEl.value = formatNumber(cardNoEl.value.replaceAll(" ", "")) );
-
-const formatNumber = (number) => number.split("").reduce((seed, next, index) => {
-  if (index !== 0 && !(index % 4)) seed += " ";
-  return seed + next;
-}, "");
+// white space every 4 digits
+cardNoEl.addEventListener("input", () => cardNoEl.value = cardNoEl.value.replace(/\s/g, '').replace(/([0-9]{4})/g, '$1 ').trim() );
 
 const checkCardNo = () => {
     let valid = false;
