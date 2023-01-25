@@ -58,6 +58,8 @@ main {
     width: 447px;
     height: 245px;
     color: var(--clr-white);
+   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+   border-radius: 10px;
 }
 
 .card.front {
