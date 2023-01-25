@@ -1,4 +1,4 @@
-const nameEl = document.querySelector("#fname");
+const nameEl = document.querySelector("#name");
 const cardNoEl = document.querySelector("#cardNo");
 const monthEl = document.querySelector("#expMonth");
 const yearEl = document.querySelector("#expYear");
@@ -64,20 +64,14 @@ nameEl.addEventListener("input", () => {
 
 /*----- Check Card No. -----*/
 
-const isCardNoValid = (cardNo) => {
-    const re = /^([0-9]|\s){19}$/;
-    return re.test(cardNo);
-};
-
-// white space every 4 digits
-cardNoEl.addEventListener("input", () => cardNoEl.value = cardNoEl.value.replace(/\s/g, '').replace(/([0-9]{4})/g, '$1 ').trim() );
-
 const checkCardNo = () => {
     let valid = false;
     const cardNo = cardNoEl.value.trim();
+    const re = /^([0-9]|\s){19}$/;
+
     if (!isRequired(cardNo)) {
         showError(cardNoEl, "Can't be blank.");
-    } else if (!isCardNoValid(cardNo)) {
+    } else if (!re.test(cardNo)) {
         showError(cardNoEl, "Wrong format, numbers only")
     } else {
         showSuccess(cardNoEl);
@@ -86,6 +80,9 @@ const checkCardNo = () => {
     return valid;
 }
 
+// white space every 4 digits
+cardNoEl.addEventListener("input", () => cardNoEl.value = cardNoEl.value.replace(/\s/g, '').replace(/([0-9]{4})/g, '$1 ').trim() );
+
 // change value on card img
 cardNoEl.addEventListener("input", () => {
     cardNo.innerHTML = cardNoEl.value;
@@ -93,19 +90,15 @@ cardNoEl.addEventListener("input", () => {
 
 /*----- Check Month -----*/
 
-const isMonthValid = (month) => {
-    const re = /^(1[0-2]|0[1-9])$/;
-    return re.test(month);
-};
-
 const checkMonth = () => {
     let valid = false;
-
     const month = monthEl.value.trim();
+    const re = /^(1[0-2]|0[1-9])$/;
+
     if (!isRequired(month)) {
         showError(monthEl, "Can't be blank.");
-    } else if (!isMonthValid(month)) {
-        showError(monthEl, `invalid month`)
+    } else if (!re.test(month)) {
+        showError(monthEl, `Invalid month`)
     } else {
         showSuccess(monthEl);
         valid = true;
@@ -134,10 +127,11 @@ const isYearValid = (year) => {
 const checkYear = () => {
     let valid = false;
     const year = yearEl.value.trim();
+
     if (!isRequired(year)) {
         showError(yearEl, "Can't be blank.");
     } else if (!isYearValid(year)) {
-        showError(yearEl, `invalid year`)
+        showError(yearEl, `Invalid year`)
     } else {
         showSuccess(yearEl);
         valid = true;
@@ -152,19 +146,15 @@ yearEl.addEventListener("input", () => {
 
 /*----- Check CVC -----*/
 
-const isCvcValid = (cvc) => {
-    const re = /^[0-9]{3}$/;
-    return re.test(cvc);
-};
-
-
 const checkCvc = () => {
     let valid = false;
     const cvc = cvcEl.value.trim();
+    const re = /^[0-9]{3}$/;
+
     if (!isRequired(cvc)) {
         showError(cvcEl, "Can't be blank.");
-    } else if (!isCvcValid(cvc)) {
-        showError(cvcEl, `invalid cvc`)
+    } else if (!re.test(cvc)) {
+        showError(cvcEl, `Invalid CVC`)
     } else {
         showSuccess(cvcEl);
         valid = true;
@@ -200,3 +190,37 @@ form.addEventListener('submit', function (e) {
         thank.style.display = 'grid';
     }
 });
+
+const debounce = (fn, delay = 500) => {
+    let timeoutId;
+    return (...args) => {
+        // cancel the previous timer
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+        // setup a new timer
+        timeoutId = setTimeout(() => {
+            fn.apply(null, args)
+        }, delay);
+    };
+};
+
+form.addEventListener('input', debounce(function (e) {
+    switch (e.target.id) {
+        case 'name':
+            checkName();
+            break;
+        case 'cardNo':
+            checkCardNo();
+            break;
+        case 'expMonth':
+            checkMonth();
+            break;
+        case 'expYear':
+            checkYear();
+            break;
+        case 'cvcNo':
+            checkCvc();
+            break;
+    }
+}));
