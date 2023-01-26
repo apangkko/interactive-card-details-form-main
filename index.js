@@ -64,6 +64,10 @@ nameEl.addEventListener("input", () => {
 
 /*----- Check Card No. -----*/
 
+const isCardNoValid = (val) => {
+    return val.length === 19 ? true : false;
+};
+
 const checkCardNo = () => {
     let valid = false;
     const cardNo = cardNoEl.value.trim();
@@ -71,6 +75,8 @@ const checkCardNo = () => {
 
     if (!isRequired(cardNo)) {
         showError(cardNoEl, "Can't be blank.");
+    } else if (!isCardNoValid(cardNo)) {
+        showError(cardNoEl, "You need to enter 16 characters")
     } else if (!re.test(cardNo)) {
         showError(cardNoEl, "Wrong format, numbers only")
     } else {
