@@ -76,7 +76,7 @@ const checkCardNo = () => {
     if (!isRequired(cardNo)) {
         showError(cardNoEl, "Can't be blank.");
     } else if (!isCardNoValid(cardNo)) {
-        showError(cardNoEl, "You need to enter 16 characters")
+        showError(cardNoEl, "You need to enter 16 numbers")
     } else if (!re.test(cardNo)) {
         showError(cardNoEl, "Wrong format, numbers only")
     } else {
@@ -197,7 +197,7 @@ form.addEventListener('submit', function (e) {
     }
 });
 
-const debounce = (fn, delay = 500) => {
+const debounce = (fn, delay = 1000) => {
     let timeoutId;
     return (...args) => {
         // cancel the previous timer
